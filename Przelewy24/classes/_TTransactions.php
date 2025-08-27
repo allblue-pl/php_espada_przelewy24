@@ -17,6 +17,7 @@ class _TTransactions extends Database\TTable {
             'Token' => new Database\FString(true, 128),
             'Result' => new Database\FText(false, 'medium'),
             'Paid' => new Database\FBool(true),
+            'Expires' =>  new Database\FLong(false),
         ]);
     }
 }

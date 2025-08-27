@@ -35,6 +35,9 @@ class HPrzelewy24 {
             'Token' => null,
             'Result' => null,
             'Paid' => false,
+            'Expires' => E\Config::IsType('dev') ? EC\HDate::GetTime() + 
+                    EC\HDate::Span_Minute : EC\HDate::GetTime() + 
+                    EC\HDate::Span_Minute * 60,
         ];
         if (!$tTransactions->update([ $rTransaction ])) {
             $error = 'Cannot update transactions.';
