@@ -36,7 +36,7 @@ class HPrzelewy24 {
             'Result' => null,
             'Paid' => false,
             'Expires' => E\Config::IsType('dev') ? EC\HDate::GetTime() + 
-                    EC\HDate::Span_Minute : EC\HDate::GetTime() + 
+                    EC\HDate::Span_Minute * 5 : EC\HDate::GetTime() + 
                     EC\HDate::Span_Minute * 60,
         ];
         if (!$tTransactions->update([ $rTransaction ])) {
