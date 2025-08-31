@@ -21,7 +21,7 @@ class HPrzelewy24 {
     static public function CreateTransaction(EC\MDatabase $db, int $posId, 
             string $secret, string $crc, int $merchantId,
             float $amount, string $currency, string $description, string $email, 
-            string $label, $urlReturn, $urlStatus, 
+            string $label, $urlReturn, $urlStatus, int $timeLimit,
             ?string &$error = 'Unknown Error'): ?array {
         $db->requireTransaction();
 
@@ -36,8 +36,8 @@ class HPrzelewy24 {
             'Result' => null,
             'Paid' => false,
             'Expires' => E\Config::IsType('dev') ? EC\HDate::GetTime() + 
-                    EC\HDate::Span_Minute * 5 : EC\HDate::GetTime() + 
-                    EC\HDate::Span_Minute * 60,
+                    EC\HDate::Span_Minute * 1 : EC\HDate::GetTime() + 
+                    EC\HDate::Span_Minute * $timeLimit,
         ];
         if (!$tTransactions->update([ $rTransaction ])) {
             $error = 'Cannot update transactions.';
@@ -87,7 +87,7 @@ class HPrzelewy24 {
             "language" => E\Langs::Get('alias'),
             "urlReturn" => $urlReturn,
             "urlStatus" => $urlStatus,
-            "timeLimit" => 60,
+            "timeLimit" => $timeLimit,
             "channel" => 1 + 2 + 16 + 4096 + 8192,
             "waitForResult" => true,
             "regulationAccept" => false,
