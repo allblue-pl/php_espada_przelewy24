@@ -173,7 +173,7 @@ class HPrzelewy24 {
         if (E\Config::IsType('przelewy24_dev'))
             return 'https://sandbox.przelewy24.pl/api/v1/';
 
-        return 'https://secure.przelewy24.pl/api/v1';
+        return 'https://secure.przelewy24.pl/api/v1/';
     }
 
     static public function GetUri_Transaction(string $token) {
