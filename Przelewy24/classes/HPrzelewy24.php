@@ -21,7 +21,7 @@ class HPrzelewy24 {
     static public function CreateTransaction(EC\MDatabase $db, int $posId, 
             string $secret, string $crc, int $merchantId,
             float $amount, string $currency, string $description, string $email, 
-            string $label, $urlReturn, $urlStatus, int $timeLimit,
+            string $name, string $label, $urlReturn, $urlStatus, int $timeLimit,
             ?string &$error = 'Unknown Error'): ?array {
         $db->requireTransaction();
 
@@ -83,6 +83,7 @@ class HPrzelewy24 {
             "currency" => 'PLN',
             "description" => $description,
             "email" => $email,
+            "client" => $name,
             "country" => "PL",
             "language" => E\Langs::Get('alias'),
             "urlReturn" => $urlReturn,
