@@ -65,6 +65,7 @@ class RAPrzelewy24 extends EC\ARestApi {
 
         $sign_Notification = HPrzelewy24::GetSign_Notification(
                 $rTransactionSecret['CRC'], $apiArgs);
+            
         if ($sign_Notification !== $apiArgs['sign']) {
             $this->db->transaction_Finish(false);
             EC\HLog::Add($this->db, null, 
