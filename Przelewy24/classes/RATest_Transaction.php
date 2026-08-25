@@ -1,20 +1,21 @@
 <?php namespace EC\Przelewy24;
 defined('_ESPADA') or die(NO_ACCESS);
 
-use E, EC,
-    EC\RestApi\CResult;
+use E, EC;
+use EC\Database\MDatabase;
+use EC\RestApi\CResult;
+use EC\RestApi\ARestApi;
+use EC\RestApi\SRestApi;
 
-class RATest_Transaction extends EC\ARestApi {
-    static private $AllowedIPs = [];
+class RATest_Transaction extends ARestApi {
+    // static private $AllowedIPs = [];
 
-    protected ?EC\MDatabase $db = null;
+    protected ?MDatabase $db = null;
 
-    public function __construct(EC\SRestApi $site) {
+    public function __construct(SRestApi $site) {
         parent::__construct($site,);
 
-        $site->addM('db', new EC\MDatabase());
-
-        $this->db = $site->m->db;
+        $this->db = new MDatabase($site);
 
         $this->action_POST('register', 'action_POST_Register');
         $this->action_PUT('verify', 'action_PUT_Verify');

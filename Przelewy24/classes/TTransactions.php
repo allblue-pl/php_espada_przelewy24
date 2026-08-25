@@ -1,11 +1,12 @@
 <?php namespace EC\Przelewy24;
 defined('_ESPADA') or die(NO_ACCESS);
 
-use E, EC,
-    EC\Database;
+use E, EC;
+use EC\Database\MDatabase;
+use EC\Przelewy24\_Tables\_TTransactions;
 
 class TTransactions extends _TTransactions {
-    public function __construct(EC\MDatabase $db) {
+    public function __construct(MDatabase $db) {
         parent::__construct($db, 'p24_tr');
 
         $this->setColumnParser('Result', [

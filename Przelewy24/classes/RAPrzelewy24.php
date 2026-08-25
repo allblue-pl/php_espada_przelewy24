@@ -1,30 +1,34 @@
 <?php namespace EC\Przelewy24;
 defined('_ESPADA') or die(NO_ACCESS);
 
-use E, EC,
-    EC\RestApi\CResult;
+use E, EC;
+use EC\RestApi\CResult;
+use EC\Database\MDatabase;
+use EC\Date\HDate;
+use EC\HttpRequest\CHttpRequest;
+use EC\Log\HLog;
+use EC\RestApi\ARestApi;
+use EC\RestApi\SRestApi;
 
-class RAPrzelewy24 extends EC\ARestApi {
-    static private $AllowedIPs = [];
+class RAPrzelewy24 extends ARestApi {
+    // static private $AllowedIPs = [];
 
-    protected ?EC\MDatabase $db = null;
+    protected ?MDatabase $db = null;
 
-    public function __construct(EC\SRestApi $site) {
+    public function __construct(SRestApi $site) {
         parent::__construct($site);
 
-        $site->addM('db', new EC\MDatabase());
-
-        $this->db = $site->m->db;
+        $this->db = new MDatabase($site);
 
         $this->action_POST('notification', 'action_POST_Notification');
 
-        EC\HDate::SetTimeZone('Europe/Warsaw');
+        HDate::SetTimeZone('Europe/Warsaw');
 
         E\Exception::AddOnErrorListener(function($e) {
             if ($this->db->isConnected())
                 $this->db->transaction_Finish(false);
             // if (!EDEBUG) {
-                EC\HLog::Add($this->db, null,
+                HLog::Add($this->db, null,
                         'Przelewy24\\RAPrzelewy24 Error.', [
                     'message' => $e->getMessage(),
                     'backtrace' => $e->getTrace(),
@@ -42,7 +46,7 @@ class RAPrzelewy24 extends EC\ARestApi {
         ], '', true);
         if ($rTransaction === null) {
             $this->db->transaction_Finish(false);
-            EC\HLog::Add($this->db, null, 
+            HLog::Add($this->db, null, 
                     "RAPrzelewy24:POST_Notification -> " . 
                     "Transaction does not exist.");
             return CResult::Error(400, [
@@ -55,7 +59,7 @@ class RAPrzelewy24 extends EC\ARestApi {
         ]);
         if ($rTransactionSecret === null) {
             $this->db->transaction_Finish(false);
-            EC\HLog::Add($this->db, null, 
+            HLog::Add($this->db, null, 
                     "RAPrzelewy24:POST_Notification -> " . 
                     "Transaction secret does not exist.");
             return CResult::Error(400, [
@@ -68,7 +72,7 @@ class RAPrzelewy24 extends EC\ARestApi {
             
         if ($sign_Notification !== $apiArgs['sign']) {
             $this->db->transaction_Finish(false);
-            EC\HLog::Add($this->db, null, 
+            HLog::Add($this->db, null, 
                     "RAPrzelewy24:POST_Notification -> " . 
                     "Signs do not match.");
             return CResult::Error(400, [
@@ -76,7 +80,7 @@ class RAPrzelewy24 extends EC\ARestApi {
             ]);
         }
 
-        $req = new EC\CHttpRequest();
+        $req = new CHttpRequest();
         $req->setAuth($rTransaction['PosId'], $rTransactionSecret['Secret']);
 
         $data = [
@@ -95,7 +99,7 @@ class RAPrzelewy24 extends EC\ARestApi {
         $json = HPrzelewy24::ParseResponse($res, $resError);
         if ($resError !== null) {
             $this->db->transaction_Finish(false);
-            EC\HLog::Add($this->db, null, 
+            HLog::Add($this->db, null, 
                     "RAPrzelewy24:POST_Notification -> " . 
                     "Verify response error: {$resError}");
             return CResult::Error(400, [
@@ -111,7 +115,7 @@ class RAPrzelewy24 extends EC\ARestApi {
             'Paid' => $paid,
                 ]])) {
             $this->db->transaction_Finish(false);
-            EC\HLog::Add($this->db, null, 
+            HLog::Add($this->db, null, 
                     "RAPrzelewy24:POST_Notification -> " . 
                     "Cannot update transaction.");
             return CResult::Error(400, [
@@ -120,7 +124,7 @@ class RAPrzelewy24 extends EC\ARestApi {
         }
 
         if (!$this->db->transaction_Finish(true)) {
-            EC\HLog::Add($this->db, null, 
+            HLog::Add($this->db, null, 
                     "RAPrzelewy24:POST_Notification -> " . 
                     "Cannot commit.");
             return CResult::Error(400, [

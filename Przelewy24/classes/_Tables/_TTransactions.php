@@ -2,7 +2,6 @@
 defined('_ESPADA') or die(NO_ACCESS);
 
 use E, EC;
-use EC\ABData\ABDataTable;
 use EC\Database;
 use EC\Database\MDatabase;
 use EC\Database\TTable;
@@ -22,9 +21,27 @@ use EC\Database\TTable;
  * }
  */
 class _TTransactions extends TTable {
-    use ABDataTable;
+    /**
+     *
+     * @param array $row
+     * @return _T_RPrzelewy24_Transactions
+     */
+    static public function AssertRow(array $row): array {
+        /* @phpstan-ignore return.type */
+        return $row;
+    }
 
-    public function __construct(MDatabase $db, $tablePrefix = 't') {
+    /**
+     *
+     * @param array $rows
+     * @return array<_T_RPrzelewy24_Transactions>
+     */
+    static public function AssertRows(array $rows): array {
+        return $rows;
+    }
+
+
+    public function __construct(MDatabase $db, $tablePrefix = 'p24_t') {
         parent::__construct($db, 'Przelewy24_Transactions', $tablePrefix);
 
         $this->setColumns([
@@ -39,27 +56,6 @@ class _TTransactions extends TTable {
             'Expires' => new Database\FLong(false), 
         ]);
         $this->setPKs([ 'Id' ]);
-    }
 
-    /**
-     *
-     * @param array $row
-     * @return _T_RPrzelewy24_Transactions
-     */
-    public function assertRow(array $row, bool $stripRow = false): array {
-        if ($stripRow)
-            $row = $this->stripRow($row);
-
-        /* @phpstan-ignore return.type */
-        return $row;
-    }
-
-    /**
-     *
-     * @param array $rows
-     * @return array<_T_RPrzelewy24_Transactions>
-     */
-    public function assertRows(array $rows): array {
-        return $rows;
     }
 }

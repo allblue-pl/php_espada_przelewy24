@@ -1,18 +1,22 @@
 <?php namespace EC\Przelewy24;
 defined('_ESPADA') or die(NO_ACCESS);
 
-use E, EC,
-    EC\Api\CArgs, EC\Api\CResult;
+use E, EC;
+use EC\Api\AApi;
+use EC\Api\CArgs;
+use EC\Api\CResult;
+use EC\Api\SApi;
+use EC\Config\HConfig;
+use EC\Database\MDatabase;
+use EC\HttpRequest\CHttpRequest;
 
-class ATest extends EC\AApi {
-    protected ?EC\MDatabase $db = null;
+class ATest extends AApi {
+    protected ?MDatabase $db = null;
 
-    public function __construct(EC\SApi $site) {
+    public function __construct(SApi $site) {
         parent::__construct($site);
 
-        $site->addM('db', new EC\MDatabase());
-
-        $this->db = $site->m->db;
+        $this->db = new MDatabase($site);
 
         $this->action('pay', 'action_Pay', [
             'token' => true,
@@ -21,7 +25,7 @@ class ATest extends EC\AApi {
 
     public function action_Pay(CArgs $args) {
         $rTransaction = (new TTransactions($this->db))->row_Where([
-            [ 'Token', '=', $args->token ],
+            [ 'Token', '=', $args->get("token") ],
         ]);
         if ($rTransaction === null)
             return CResult::Failure('Transaction does not exist.');
@@ -32,7 +36,7 @@ class ATest extends EC\AApi {
         if ($rTest === null)
             return CResult::Failure('Test info does not exist.');
 
-        $req = new EC\CHttpRequest();
+        $req = new CHttpRequest();
 
         $data = [
             'merchantId' => $rTest['Info']['merchantId'],
@@ -45,7 +49,7 @@ class ATest extends EC\AApi {
             'methodId' => 1,
             'statement' => 'Opłata',
         ];
-        $data['sign'] = HPrzelewy24::GetSign_Notification(EC\HConfig::GetRequired(
+        $data['sign'] = HPrzelewy24::GetSign_Notification(HConfig::GetRequired(
                 'Przelewy24', 'testCRC'), $data);
 
         $res = $req->post_JSON($rTest['Info']['urlStatus'], $data);
