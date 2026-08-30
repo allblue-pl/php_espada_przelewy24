@@ -11,7 +11,7 @@ use EC\Database\MDatabase;
 use EC\HttpRequest\CHttpRequest;
 
 class ATest extends AApi {
-    protected ?MDatabase $db = null;
+    protected MDatabase $db;
 
     public function __construct(SApi $site) {
         parent::__construct($site);

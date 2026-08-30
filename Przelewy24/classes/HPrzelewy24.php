@@ -33,8 +33,10 @@ class HPrzelewy24 {
             foreach ($langs as $lang => $langInfo)
                 $page->alias($lang, "przelewy24-test/transaction/*");
 
-            $page = $eSite->page('przelewy24Test.api', 'Api:api', 
-                    [ 'api' => 'EC\Przelewy24\ATest' ]);
+            $page = $eSite->page('przelewy24Test.api', 'Api:api', [ 
+                'site' => 'EC\Api\SApi',
+                'api' => 'EC\Przelewy24\ATest',
+            ]);
             foreach ($langs as $lang => $langInfo)
                 $page->alias($lang, "przelewy24-test/*");
         }
@@ -190,7 +192,7 @@ class HPrzelewy24 {
     static public function GetUri_Api() {    
         if (E\Config::IsType('przelewy24_local')) {
             return SITE_DOMAIN . SITE_BASE. E\Langs::Get()['alias'] . 
-                    '/przelewy24-test/';
+                    'przelewy24-test/';
         }
 
         if (E\Config::IsType('przelewy24_dev'))

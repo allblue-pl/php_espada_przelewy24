@@ -12,13 +12,12 @@ use EC\RestApi\SRestApi;
 
 class RAPrzelewy24 extends ARestApi {
     // static private $AllowedIPs = [];
-
-    protected ?MDatabase $db = null;
+    protected MDatabase $db;
 
     public function __construct(SRestApi $site) {
         parent::__construct($site);
 
-        $this->db = new MDatabase($site);
+        $this->db = $site->getDB();
 
         $this->action_POST('notification', 'action_POST_Notification');
 
@@ -81,12 +80,12 @@ class RAPrzelewy24 extends ARestApi {
         }
 
         $req = new CHttpRequest();
-        $req->setAuth($rTransaction['PosId'], $rTransactionSecret['Secret']);
+        $req->setAuth(strval($rTransaction['PosId']), $rTransactionSecret['Secret']);
 
         $data = [
             "merchantId" => $rTransaction['MerchantId'],
             "posId" => $rTransaction['PosId'],
-            "sessionId" => (string)$rTransaction['Id'],
+            "sessionId" => strval($rTransaction['Id']),
             "amount" => $rTransaction['Amount'],
             "currency" => $rTransaction['Currency'],
             "orderId" => $apiArgs['orderId'],
