@@ -10,7 +10,7 @@ use Override;
 
 /**
  *
- * @phpstan-type _T_RPrzelewy24_Tests array{
+ * @phpstan-type _T_TRPrzelewy24_Tests array{
  *     Id: int,
  *     Info: mixed,
  * }
@@ -18,8 +18,8 @@ use Override;
 class _TTests extends TTable {
     /**
      *
-     * @param _T_RPrzelewy24_Tests $row
-     * @return _T_RPrzelewy24_Tests
+     * @param _T_TRPrzelewy24_Tests $row
+     * @return _T_TRPrzelewy24_Tests
      */
     static public function AssertRow(array $row): array {
         return $row;
@@ -27,8 +27,8 @@ class _TTests extends TTable {
 
     /**
      *
-     * @param list<_T_RPrzelewy24_Tests> $rows
-     * @return list<_T_RPrzelewy24_Tests>
+     * @param list<_T_TRPrzelewy24_Tests> $rows
+     * @return list<_T_TRPrzelewy24_Tests>
      */
     static public function AssertRows(array $rows): array {
         return $rows;
@@ -37,7 +37,7 @@ class _TTests extends TTable {
     // /**
     //  *
     //  * @param array|null $row
-    //  * @return _T_RPrzelewy24_Tests|null
+    //  * @return _T_TRPrzelewy24_Tests|null
     //  */
     // static public function CastRow(array|null $row): array|null {
     //     /* phpstan-ignore return.type */
@@ -47,7 +47,7 @@ class _TTests extends TTable {
     // /**
     //  *
     //  * @param array $rows
-    //  * @return list<_T_RPrzelewy24_Tests>
+    //  * @return list<_T_TRPrzelewy24_Tests>
     //  */
     // static public function CastRows(array $rows): array {
     //     return $rows;
@@ -69,7 +69,7 @@ class _TTests extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_Tests|null
+     * @return _T_TRPrzelewy24_Tests|null
      */
      #[Override]
     public function row_ByColumn(string $colName, mixed $colValue, 
@@ -79,7 +79,7 @@ class _TTests extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_Tests|null
+     * @return _T_TRPrzelewy24_Tests|null
      */
     #[Override]
     public function row_ByPKs(array $keys, string $groupExtension = '', 
@@ -89,7 +89,7 @@ class _TTests extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_Tests|null
+     * @return _T_TRPrzelewy24_Tests|null
      */
     #[Override]
     public function row_Where(array $conditions = [], string $groupExtension = '',
@@ -99,8 +99,7 @@ class _TTests extends TTable {
     }
 
     /** 
-     * @return list<_T_RPrzelewy24_Tests>|null
-     * @phpstan-ignore return.phpDocType
+     * @return list<_T_TRPrzelewy24_Tests>
      */
     #[Override]
     public function select_ByPKs(array $pks, string $groupExtension = ''): array {
@@ -108,8 +107,7 @@ class _TTests extends TTable {
     }
 
     /** 
-     * @return list<_T_RPrzelewy24_Tests>|null
-     * @phpstan-ignore return.phpDocType
+     * @return list<_T_TRPrzelewy24_Tests>
      */
     #[Override]
     public function select_Where(array $conditions = [], string $groupExtension = '',
@@ -118,7 +116,7 @@ class _TTests extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_Tests
+     * @return _T_TRPrzelewy24_Tests
      */
     #[Override]
     public function stripRow_TableColumnsOnly(array $row): array {

@@ -10,7 +10,7 @@ use Override;
 
 /**
  *
- * @phpstan-type _T_RPrzelewy24_TransactionSecrets array{
+ * @phpstan-type _T_TRPrzelewy24_TransactionSecrets array{
  *     Id: int,
  *     Secret: string,
  *     CRC: string,
@@ -19,8 +19,8 @@ use Override;
 class _TTransactionSecrets extends TTable {
     /**
      *
-     * @param _T_RPrzelewy24_TransactionSecrets $row
-     * @return _T_RPrzelewy24_TransactionSecrets
+     * @param _T_TRPrzelewy24_TransactionSecrets $row
+     * @return _T_TRPrzelewy24_TransactionSecrets
      */
     static public function AssertRow(array $row): array {
         return $row;
@@ -28,8 +28,8 @@ class _TTransactionSecrets extends TTable {
 
     /**
      *
-     * @param list<_T_RPrzelewy24_TransactionSecrets> $rows
-     * @return list<_T_RPrzelewy24_TransactionSecrets>
+     * @param list<_T_TRPrzelewy24_TransactionSecrets> $rows
+     * @return list<_T_TRPrzelewy24_TransactionSecrets>
      */
     static public function AssertRows(array $rows): array {
         return $rows;
@@ -38,7 +38,7 @@ class _TTransactionSecrets extends TTable {
     // /**
     //  *
     //  * @param array|null $row
-    //  * @return _T_RPrzelewy24_TransactionSecrets|null
+    //  * @return _T_TRPrzelewy24_TransactionSecrets|null
     //  */
     // static public function CastRow(array|null $row): array|null {
     //     /* phpstan-ignore return.type */
@@ -48,7 +48,7 @@ class _TTransactionSecrets extends TTable {
     // /**
     //  *
     //  * @param array $rows
-    //  * @return list<_T_RPrzelewy24_TransactionSecrets>
+    //  * @return list<_T_TRPrzelewy24_TransactionSecrets>
     //  */
     // static public function CastRows(array $rows): array {
     //     return $rows;
@@ -70,7 +70,7 @@ class _TTransactionSecrets extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_TransactionSecrets|null
+     * @return _T_TRPrzelewy24_TransactionSecrets|null
      */
      #[Override]
     public function row_ByColumn(string $colName, mixed $colValue, 
@@ -80,7 +80,7 @@ class _TTransactionSecrets extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_TransactionSecrets|null
+     * @return _T_TRPrzelewy24_TransactionSecrets|null
      */
     #[Override]
     public function row_ByPKs(array $keys, string $groupExtension = '', 
@@ -90,7 +90,7 @@ class _TTransactionSecrets extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_TransactionSecrets|null
+     * @return _T_TRPrzelewy24_TransactionSecrets|null
      */
     #[Override]
     public function row_Where(array $conditions = [], string $groupExtension = '',
@@ -100,8 +100,7 @@ class _TTransactionSecrets extends TTable {
     }
 
     /** 
-     * @return list<_T_RPrzelewy24_TransactionSecrets>|null
-     * @phpstan-ignore return.phpDocType
+     * @return list<_T_TRPrzelewy24_TransactionSecrets>
      */
     #[Override]
     public function select_ByPKs(array $pks, string $groupExtension = ''): array {
@@ -109,8 +108,7 @@ class _TTransactionSecrets extends TTable {
     }
 
     /** 
-     * @return list<_T_RPrzelewy24_TransactionSecrets>|null
-     * @phpstan-ignore return.phpDocType
+     * @return list<_T_TRPrzelewy24_TransactionSecrets>
      */
     #[Override]
     public function select_Where(array $conditions = [], string $groupExtension = '',
@@ -119,7 +117,7 @@ class _TTransactionSecrets extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_TransactionSecrets
+     * @return _T_TRPrzelewy24_TransactionSecrets
      */
     #[Override]
     public function stripRow_TableColumnsOnly(array $row): array {

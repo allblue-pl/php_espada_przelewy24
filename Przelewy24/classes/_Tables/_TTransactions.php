@@ -10,7 +10,7 @@ use Override;
 
 /**
  *
- * @phpstan-type _T_RPrzelewy24_Transactions array{
+ * @phpstan-type _T_TRPrzelewy24_Transactions array{
  *     Id: int|null,
  *     MerchantId: int,
  *     PosId: int,
@@ -25,8 +25,8 @@ use Override;
 class _TTransactions extends TTable {
     /**
      *
-     * @param _T_RPrzelewy24_Transactions $row
-     * @return _T_RPrzelewy24_Transactions
+     * @param _T_TRPrzelewy24_Transactions $row
+     * @return _T_TRPrzelewy24_Transactions
      */
     static public function AssertRow(array $row): array {
         return $row;
@@ -34,8 +34,8 @@ class _TTransactions extends TTable {
 
     /**
      *
-     * @param list<_T_RPrzelewy24_Transactions> $rows
-     * @return list<_T_RPrzelewy24_Transactions>
+     * @param list<_T_TRPrzelewy24_Transactions> $rows
+     * @return list<_T_TRPrzelewy24_Transactions>
      */
     static public function AssertRows(array $rows): array {
         return $rows;
@@ -44,7 +44,7 @@ class _TTransactions extends TTable {
     // /**
     //  *
     //  * @param array|null $row
-    //  * @return _T_RPrzelewy24_Transactions|null
+    //  * @return _T_TRPrzelewy24_Transactions|null
     //  */
     // static public function CastRow(array|null $row): array|null {
     //     /* phpstan-ignore return.type */
@@ -54,7 +54,7 @@ class _TTransactions extends TTable {
     // /**
     //  *
     //  * @param array $rows
-    //  * @return list<_T_RPrzelewy24_Transactions>
+    //  * @return list<_T_TRPrzelewy24_Transactions>
     //  */
     // static public function CastRows(array $rows): array {
     //     return $rows;
@@ -82,7 +82,7 @@ class _TTransactions extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_Transactions|null
+     * @return _T_TRPrzelewy24_Transactions|null
      */
      #[Override]
     public function row_ByColumn(string $colName, mixed $colValue, 
@@ -92,7 +92,7 @@ class _TTransactions extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_Transactions|null
+     * @return _T_TRPrzelewy24_Transactions|null
      */
     #[Override]
     public function row_ByPKs(array $keys, string $groupExtension = '', 
@@ -102,7 +102,7 @@ class _TTransactions extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_Transactions|null
+     * @return _T_TRPrzelewy24_Transactions|null
      */
     #[Override]
     public function row_Where(array $conditions = [], string $groupExtension = '',
@@ -112,8 +112,7 @@ class _TTransactions extends TTable {
     }
 
     /** 
-     * @return list<_T_RPrzelewy24_Transactions>|null
-     * @phpstan-ignore return.phpDocType
+     * @return list<_T_TRPrzelewy24_Transactions>
      */
     #[Override]
     public function select_ByPKs(array $pks, string $groupExtension = ''): array {
@@ -121,8 +120,7 @@ class _TTransactions extends TTable {
     }
 
     /** 
-     * @return list<_T_RPrzelewy24_Transactions>|null
-     * @phpstan-ignore return.phpDocType
+     * @return list<_T_TRPrzelewy24_Transactions>
      */
     #[Override]
     public function select_Where(array $conditions = [], string $groupExtension = '',
@@ -131,7 +129,7 @@ class _TTransactions extends TTable {
     }
 
     /** 
-     * @return _T_RPrzelewy24_Transactions
+     * @return _T_TRPrzelewy24_Transactions
      */
     #[Override]
     public function stripRow_TableColumnsOnly(array $row): array {
